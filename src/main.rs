@@ -2,7 +2,8 @@ use judge_a_book::{Cmd, Result};
 
 use clap::Parser;
 
-const ENV_API_KEY: &str = "JUDGE_API_KEY";
+const ENV_CHAIN_API_KEY: &str = "JUDGE_CHAIN_API_KEY";
+const ENV_ASSET_API_KEY: &str = "JUDGE_ASSET_API_KEY";
 const ENV_CARDANO_BASE_URL: &str = "JUDGE_CHAIN_URL";
 const ENV_IPFS_BASE_URL: &str = "JUDGE_ASSETS_URL";
 
@@ -24,9 +25,15 @@ struct Cli {
     #[arg(
         global = true,
         long,
-        env = ENV_API_KEY,
+        env = ENV_CHAIN_API_KEY,
     )]
-    api_key: String,
+    chain_api_key: String,
+    #[arg(
+        global = true,
+        long,
+        env = ENV_ASSET_API_KEY,
+    )]
+    asset_api_key: Option<String>,
     #[arg(
         global = true,
         long,

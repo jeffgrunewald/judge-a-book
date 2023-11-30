@@ -20,7 +20,10 @@ pub struct FetchCoversArgs {
     res: Resolution,
     /// The key for querying the blockchain API
     #[arg(from_global)]
-    api_key: String,
+    chain_api_key: String,
+    /// The key for querying/retrieving IPFS assets
+    #[arg(from_global)]
+    asset_api_key: Option<String>,
     /// The base url for querying the blockchain API
     #[arg(from_global)]
     chain_base_url: String,
@@ -77,7 +80,12 @@ impl FetchCoversArgs {
             return Ok(());
         }
 
-        let client = Client::new(&self.api_key, &self.asset_base_url, &self.chain_base_url)?;
+        let client = Client::new(
+            &self.chain_api_key,
+            self.asset_api_key.unwrap_or_default(),
+            &self.asset_base_url,
+            &self.chain_base_url,
+        )?;
         if client.is_valid_collection(&collection_id)? {
             let files = client.get_assets_covers(
                 &collection_id,

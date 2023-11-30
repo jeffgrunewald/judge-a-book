@@ -48,3 +48,22 @@ collection in high-resolution format to the `./output` directory and subsequent 
 command will exit immediately without re-downloading any images. Deleting a single image and
 re-running again will download one additional cover image. Increasing the number of requested
 images will result in the difference being downloaded.
+
+
+#### Regarding API Keys
+At the time of writing, the default blockchain interface, Blockfrost over Cardano, requires
+separate API/project keys for cardano-mainnet and IPFS and provides a single project in their
+free account tier. Because of this, the default IPFS API endpoint is an unauthenticated public
+gateway and the API key to retrieve assets is an optional parameter that defaults to an empty
+string. If using `judge` with the Blockfrost API and a separate project key, you will need to
+override the `--asset-base-url` or `JUDGE_ASSET_URL` environment variable to something like
+`https://ipfs.blockfrost.io/api/v0/ipfs/gateway`.
+
+#### Regarding dependencies and versions
+Judge is built and tested on Rust 1.72.0 (stable) but should run on much older versions because
+of Rust's backward compatibility commitment and the low number of popular/stable dependencies
+Judge is built on.
+
+Every language has its warts and one of Rust's is Cargo's dependency conflict resolution with
+large dependency chains so Judge aims to be fully functional entirely through very well-maintained
+and stable dependencies.

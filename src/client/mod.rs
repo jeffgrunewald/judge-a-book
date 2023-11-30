@@ -10,7 +10,8 @@ const USER_AGENT: &str = concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VE
 const BOOKIO_COLLECTION_URL: &str = "https://api.book.io/api/v0/collections";
 
 pub struct Client {
-    api_key: String,
+    chain_key: String,
+    asset_key: String,
     asset_url: String,
     chain_url: String,
     client: reqwest::blocking::Client,
@@ -18,12 +19,14 @@ pub struct Client {
 
 impl Client {
     pub fn new(
-        api_key: impl AsRef<str>,
+        chain_key: impl AsRef<str>,
+        asset_key: impl AsRef<str>,
         asset_url: impl AsRef<str>,
         chain_url: impl AsRef<str>,
     ) -> Result<Self> {
         Ok(Self {
-            api_key: api_key.as_ref().to_string(),
+            chain_key: chain_key.as_ref().to_string(),
+            asset_key: asset_key.as_ref().to_string(),
             asset_url: asset_url.as_ref().to_string(),
             chain_url: chain_url.as_ref().to_string(),
             client: reqwest::blocking::Client::builder()
@@ -59,7 +62,7 @@ impl Client {
         let response = self
             .client
             .get(format!("{}/assets/policy/{}", &self.chain_url, &id))
-            .header("project_id", &self.api_key)
+            .header("project_id", &self.chain_key)
             .send()?;
         match response.status() {
             reqwest::StatusCode::OK => {
@@ -96,7 +99,7 @@ impl Client {
         if let Ok(response) = self
             .client
             .get(format!("{}/assets/{}", &self.chain_url, id.as_ref()))
-            .header("project_id", &self.api_key)
+            .header("project_id", &self.chain_key)
             .send()
         {
             if response.status() == reqwest::StatusCode::OK {
@@ -123,6 +126,7 @@ impl Client {
         let response = self
             .client
             .get(format!("{}/{}", &self.asset_url, cid.as_ref()))
+            .header("project_id", &self.asset_key)
             .send()?;
         match response.status() {
             reqwest::StatusCode::OK => {
