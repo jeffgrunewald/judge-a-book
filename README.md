@@ -1,6 +1,8 @@
 # Judge A Book
 ### Query Book.io collections for their covers
 
+#### Overview
+
 This is a demo project for interfacing with the Book.io API and associated
 blockchain and distributed asset storage solution. At the time of writing,
 the blockchain is Cardano, the interface to the chain is the Blockfrost, and
@@ -19,6 +21,8 @@ configuration via environment variables, and encapsulate the interactions with a
 blockchain and distributed storage services via REST APIs queried via `reqwest`.
 The implementation aspires to runtime simplicity and speed, opting for blocking
 REST calls but running them in parallel via `rayon`.
+
+#### Install and Run
 
 To run the project, install rust `1.72.0` or greater, clone the project and build the
 CLI with `cargo build --release`. The `judge` binary will be waiting for you at the
