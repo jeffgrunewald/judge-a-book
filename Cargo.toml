@@ -1,0 +1,23 @@
+[package]
+name = "judge-a-book"
+version = "0.1.0"
+edition = "2021"
+license = "Apache-2.0"
+authors = ["Jeff Grunewald <jeff.grunewald@gmail.com>"]
+
+description = "CLI for querying Book.io collections and retrieving their hi-res cover art"
+readme = "README.md"
+keywords = ["book.io", "cardano", "cli", "cover"]
+
+[[bin]]
+name = "judge"
+path = "src/main.rs"
+doc = false
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive", "env"] }
+rayon = "1"
+reqwest = { version = "0", default-features = false, features = ["blocking", "json", "rustls-tls"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
