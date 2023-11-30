@@ -43,7 +43,10 @@ Additional flags are `-n, --number` to adjust the number of images downloaded,
 and `--asset-base-url` to customize the source of the blockchain and asset storage
 endpoints. In addition, the environment variables `JUDGE_API_KEY`, `JUDGE_CHAIN_URL`, and
 `JUDGE_ASSETS_URL` can be set to avoid passing the Blockfrost project key or any custom
-URLs at each command input.
+URLs at each command input. You can obtain an API key to query Blockfrost's Cardano chain
+at [the Blockfrost Dashboard](https://blockfrost.io/dashboard) by signing up for a free
+account and creating a project. Be sure to attach your project to the `cardano-mainnet`
+chain when given the option. The Project ID is your API key.
 
 The tool attempts to download only as many image covers as requested per input collection
 ID, resolution, and output directory and to do so only once idempotently. For example, the
